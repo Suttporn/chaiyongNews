@@ -154,6 +154,7 @@ export default {
     this.itemss = order2.data;
     console.log(order2.data);
   },
+  
   methods: {
     backindex() {
       this.$router.push({ path: "/" });
