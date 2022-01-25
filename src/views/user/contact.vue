@@ -50,7 +50,9 @@
           />
           <br />
           <a href="https://www.facebook.com/Chaiyongchiangmai351/"
-            ><b style="font-size: 18px;color: #c0940f;">FB : ชัยยงค์การช่าง เชียงใหม่</b></a
+            ><b style="font-size: 18px; color: #c0940f"
+              >FB : ชัยยงค์การช่าง เชียงใหม่</b
+            ></a
           >
         </b-col>
       </b-row>
@@ -70,42 +72,42 @@
     <!-- footer -->
     <br /><br />
     <div class="footerr">
-      
-        <b-row>
-          <b-col cols="4">
-            <div style="padding-top: 10px">
-              <b-icon
-                icon="house-fill"
-                variant="light"
-                font-scale="1.5"
-              ></b-icon>
-            </div>
-            <font color="#FFFFFF">สินค้า</font>
-          </b-col>
+      <b-row>
+        <b-col cols="4">
+          <div style="padding-top: 10px">
+            <b-icon
+              @click="backindex()"
+              icon="house-fill"
+              variant="light"
+              font-scale="1.5"
+            ></b-icon>
+          </div>
+          <font color="#FFFFFF">สินค้า</font>
+        </b-col>
 
-          <b-col cols="4">
-            <div style="padding-top: 10px">
-              <b-icon
-                icon="heart-fill"
-                variant="light"
-                font-scale="1.5"
-              ></b-icon>
-            </div>
-            <font color="#FFFFFF">ถูกใจ</font>
-          </b-col>
+        <b-col cols="4">
+          <div style="padding-top: 10px">
+            <b-icon
+              @click="backlike()"
+              icon="heart-fill"
+              variant="light"
+              font-scale="1.5"
+            ></b-icon>
+          </div>
+          <font color="#FFFFFF">ถูกใจ</font>
+        </b-col>
 
-          <b-col cols="4" @click="gocart()">
-            <div style="padding-top: 10px">
-              <b-icon
-                icon="basket-fill"
-                variant="light"
-                font-scale="1.5"
-              ></b-icon>
-            </div>
-            <font color="#FFFFFF">รถเข็น</font>
-          </b-col>
-        </b-row>
-    
+        <b-col cols="4" @click="goshopping()">
+          <div style="padding-top: 10px">
+            <b-icon
+              icon="basket-fill"
+              variant="light"
+              font-scale="1.5"
+            ></b-icon>
+          </div>
+          <font color="#FFFFFF">รถเข็น</font>
+        </b-col>
+      </b-row>
     </div>
     <!-- footer -->
   </div>
@@ -118,6 +120,17 @@ export default {
   },
   data() {
     return;
+  },
+  methods: {
+    backindex() {
+      this.$router.push({ path: "/" });
+    },
+    backlike() {
+      this.$router.push({ path: "/userlike" });
+    },
+    goshopping() {
+      this.$router.push({ path: "/usershopping" });
+    },
   },
 };
 </script>

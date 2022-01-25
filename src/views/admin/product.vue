@@ -1,40 +1,9 @@
 <template>
   <div>
     <div style="background: #f5f5f5">
-      <div>
-      <b-navbar toggleable="lg" type="dark" variant="info" style="z-index: 1">
-        <b-navbar-brand href="#">ChaiYang</b-navbar-brand>
-
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-        <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav>
-            <b-nav-item @click="costomer()" >ข้อมูลลูกค้า</b-nav-item>
-            <b-nav-item @click="product()" disabled>ข้อมูลสินค้า</b-nav-item>
-            <b-nav-item @click="order()">ออเดอร์สินค้า</b-nav-item>
-            <b-nav-item-dropdown text="ประวัติ" right>
-              <b-dropdown-item href="#">ประวัติการสั่งซื้อ</b-dropdown-item>
-              <b-dropdown-item href="#"
-                >ประวัติการยกเลิกออเดอร์</b-dropdown-item
-              >
-            </b-nav-item-dropdown>
-            <b-nav-item href="#">dashboard</b-nav-item>
-          </b-navbar-nav>
-
-          <!-- Right aligned nav items -->
-          <b-navbar-nav class="ml-auto">
-            <b-nav-item-dropdown right>
-              <!-- Using 'button-content' slot -->
-              <template #button-content>
-                <em>{{NAMEUSER}}</em>
-              </template>
-              <!-- <b-dropdown-item href="#">โปรไฟล์</b-dropdown-item> -->
-              <b-dropdown-item  @click="logouts">ออกจากระบบ</b-dropdown-item>
-            </b-nav-item-dropdown>
-          </b-navbar-nav>
-        </b-collapse>
-      </b-navbar>
-    </div>
+      <!-- --------------nav------------ -->
+      <Navadmin />
+      <!-- --------------nav------------ -->
       <br /><br /><br />
 
       <div style="padding: 10px">
@@ -45,12 +14,7 @@
             </div>
           </b-col>
           <b-col align="right">
-            <b-button
-              pill
-              variant="warning"
-
-              @click="showModal"
-            >
+            <b-button pill variant="warning" @click="showModal">
               <b style="font-size: 16px; padding: 10px">เพิ่มสินค้า</b>
             </b-button>
           </b-col>
@@ -125,18 +89,18 @@
 
         <b-row style="margin-top: 10px">
           <b-col cols="8" lg="6">
-          <b-input-group class="mb-2">
-            <b-input-group-prepend is-text>
-              <b-icon icon="search"></b-icon>
-            </b-input-group-prepend>
-            <b-form-input
-              type="search"
-              v-model="search"
-              @keyup="serchProduct()"
-              placeholder="ค้นหา"
-            ></b-form-input>
-          </b-input-group>
-        </b-col>
+            <b-input-group class="mb-2">
+              <b-input-group-prepend is-text>
+                <b-icon icon="search"></b-icon>
+              </b-input-group-prepend>
+              <b-form-input
+                type="search"
+                v-model="search"
+                @keyup="serchProduct()"
+                placeholder="ค้นหา"
+              ></b-form-input>
+            </b-input-group>
+          </b-col>
           <b-col></b-col>
         </b-row>
       </div>
@@ -153,7 +117,7 @@
         :filterIncludedFields="filterOn"
         :head-variant="dark"
       >
-      <template v-slot:cell(detail)="row">
+        <template v-slot:cell(detail)="row">
           <!-- รายละเอียด -->
           <b-button
             variant="warning"
@@ -310,13 +274,17 @@
   </div>
 </template>
 <script>
+import Navadmin from "../../components/Navadmin";
 import axios from "axios";
 import firebase from "firebase";
 const api_url = require("../../../utilities/api");
 export default {
+  components: {
+    Navadmin,
+  },
   data() {
     return {
-      NAMEUSER:'',
+      NAMEUSER: "",
       PRODUCT_NAME: "",
       DETAIL: "",
       PRICE: "",
@@ -331,7 +299,7 @@ export default {
       fields: [
         { key: "PRODUCT_ID", label: "รหัสสินค้า", class: "text-center" },
         { key: "PRODUCT_NAME", label: "ชื่อสินค้า", class: "text-center" },
-         { key: "detail", label: "รายละเอียด", class: "text-center" },
+        { key: "detail", label: "รายละเอียด", class: "text-center" },
         { key: "edit", label: "จัดการข้อมูล", class: "text-center" },
       ],
       types: [
@@ -368,7 +336,7 @@ export default {
     };
   },
   created() {
-    this.NAMEUSER = localStorage.getItem("USER")
+    this.NAMEUSER = localStorage.getItem("USER");
     // สินค้า
     axios
       .post(`${api_url.api_url}/selectproductALL`, {
@@ -380,20 +348,20 @@ export default {
       });
   },
   methods: {
-      // nav
-    costomer(){
+    // nav
+    costomer() {
       this.$router.push({ path: "/admincustomer" });
     },
-    product(){
+    product() {
       this.$router.push({ path: "/adminproduct" });
     },
-    order(){
+    order() {
       this.$router.push({ path: "/adminorder" });
     },
     logouts() {
-      console.log('logout');
+      console.log("logout");
       this.$router.push({ path: "/" });
-       localStorage.clear();
+      localStorage.clear();
     },
     // nav
     serchProduct() {

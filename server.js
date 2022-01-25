@@ -171,6 +171,34 @@ app.post('/updateProductstatus', async (req, res) => {
   res.send(query)
 });
 
+app.post('/updateStatusOrder', async (req, res) => {
+  const {
+    body
+  } = req;
+  console.log(body);
+  var query = await query_command(`UPDATE orders
+  SET 
+  STATUS = '${body.STATUS}' 
+  WHERE ORDER_ID = ${body.ORDER_ID};`);
+  console.log(query);
+  res.send(query)
+});
+
+app.post('/updateStatusOrder3', async (req, res) => {
+  const {
+    body
+  } = req;
+  console.log(body);
+  var query = await query_command(`UPDATE orders
+  SET 
+  PERCEL_NEMBER = '${body.PERCEL_NEMBER}' ,
+  KERRY = '${body.KERRY}' ,
+  STATUS = '${body.STATUS}' 
+  WHERE ORDER_ID = ${body.ORDER_ID};`);
+  console.log(query);
+  res.send(query)
+});
+
 app.post('/updateLike', async (req, res) => {
   const {
     body
@@ -237,6 +265,126 @@ app.post('/selectproduct3', async (req, res) => {
   } = req;
 
   var query = await query_command(`SELECT * FROM product WHERE STATUS = '3' LIMIT 6  `);
+  //console.log(query);
+  res.send(query)
+});
+
+app.post('/selectproductorder1', async (req, res) => {
+  const {
+    body
+  } = req;
+
+  var query = await query_command(`SELECT product.*,orders.*,shopping_cart.TOTAL,orders.STATUS AS ORDERSTATUS FROM orders
+  JOIN cart ON cart.CART_ID = orders.CART_ID
+  JOIN shopping_cart ON cart.CART_ID = shopping_cart.CART_ID
+  JOIN product ON shopping_cart.PRODUCT_ID = product.PRODUCT_ID
+  WHERE shopping_cart.STATUS = '3' AND orders.STATUS IN ('1','2','3')  AND MEMBER_ID = '${body.MEMBER_ID}'`);
+  //console.log(query);
+  res.send(query)
+});
+
+app.post('/selectproductorderadmin1', async (req, res) => {
+  const {
+    body
+  } = req;
+
+  var query = await query_command(`SELECT receipt.RECEIPT_IMG,product.*,orders.*,shopping_cart.TOTAL,CONCAT(member.NAME,' ',member.LNAME) AS MEMBER_NAME ,CONCAT(member.ADDRESS,' จ.',member.PROVINCE,' อ.',member.PROVINCE,' ต.',member.PROVINCE,' รหัสไปรษณีย์ ',member.ZIPCODE,' ',member.PHONE_NUMBER) AS MEMBER_ADDRESS FROM orders
+  JOIN cart ON cart.CART_ID = orders.CART_ID
+  JOIN member ON cart.MEMBER_ID = member.MEMBER_ID
+  JOIN shopping_cart ON cart.CART_ID = shopping_cart.CART_ID
+  JOIN receipt ON cart.CART_ID = receipt.CART_ID
+  JOIN product ON shopping_cart.PRODUCT_ID = product.PRODUCT_ID
+  WHERE shopping_cart.STATUS = '3' AND orders.STATUS = '1'`);
+  //console.log(query);
+  res.send(query)
+});
+
+app.post('/selectproductorderadmin2', async (req, res) => {
+  const {
+    body
+  } = req;
+
+  var query = await query_command(`SELECT receipt.RECEIPT_IMG,product.*,orders.*,shopping_cart.TOTAL,CONCAT(member.NAME,' ',member.LNAME) AS MEMBER_NAME ,CONCAT(member.ADDRESS,' จ.',member.PROVINCE,' อ.',member.PROVINCE,' ต.',member.PROVINCE,' รหัสไปรษณีย์ ',member.ZIPCODE,' ',member.PHONE_NUMBER) AS MEMBER_ADDRESS FROM orders
+  JOIN cart ON cart.CART_ID = orders.CART_ID
+  JOIN member ON cart.MEMBER_ID = member.MEMBER_ID
+  JOIN shopping_cart ON cart.CART_ID = shopping_cart.CART_ID
+  JOIN receipt ON cart.CART_ID = receipt.CART_ID
+  JOIN product ON shopping_cart.PRODUCT_ID = product.PRODUCT_ID
+  WHERE shopping_cart.STATUS = '3' AND orders.STATUS = '2'`);
+  //console.log(query);
+  res.send(query)
+});
+
+app.post('/selectproductorderadmin3', async (req, res) => {
+  const {
+    body
+  } = req;
+
+  var query = await query_command(`SELECT receipt.RECEIPT_IMG,product.*,orders.*,shopping_cart.TOTAL,CONCAT(member.NAME,' ',member.LNAME) AS MEMBER_NAME ,CONCAT(member.ADDRESS,' จ.',member.PROVINCE,' อ.',member.PROVINCE,' ต.',member.PROVINCE,' รหัสไปรษณีย์ ',member.ZIPCODE,' ',member.PHONE_NUMBER) AS MEMBER_ADDRESS FROM orders
+  JOIN cart ON cart.CART_ID = orders.CART_ID
+  JOIN member ON cart.MEMBER_ID = member.MEMBER_ID
+  JOIN shopping_cart ON cart.CART_ID = shopping_cart.CART_ID
+  JOIN receipt ON cart.CART_ID = receipt.CART_ID
+  JOIN product ON shopping_cart.PRODUCT_ID = product.PRODUCT_ID
+  WHERE shopping_cart.STATUS = '3' AND orders.STATUS = '3'`);
+  //console.log(query);
+  res.send(query)
+});
+
+app.post('/selectproductorderadmin4', async (req, res) => {
+  const {
+    body
+  } = req;
+
+  var query = await query_command(`SELECT receipt.RECEIPT_IMG,product.*,orders.*,shopping_cart.TOTAL,CONCAT(member.NAME,' ',member.LNAME) AS MEMBER_NAME ,CONCAT(member.ADDRESS,' จ.',member.PROVINCE,' อ.',member.PROVINCE,' ต.',member.PROVINCE,' รหัสไปรษณีย์ ',member.ZIPCODE,' ',member.PHONE_NUMBER) AS MEMBER_ADDRESS FROM orders
+  JOIN cart ON cart.CART_ID = orders.CART_ID
+  JOIN member ON cart.MEMBER_ID = member.MEMBER_ID
+  JOIN shopping_cart ON cart.CART_ID = shopping_cart.CART_ID
+  JOIN receipt ON cart.CART_ID = receipt.CART_ID
+  JOIN product ON shopping_cart.PRODUCT_ID = product.PRODUCT_ID
+  WHERE shopping_cart.STATUS = '3' AND orders.STATUS = '4'`);
+  //console.log(query);
+  res.send(query)
+});
+
+app.post('/selectproductorderadmin5', async (req, res) => {
+  const {
+    body
+  } = req;
+
+  var query = await query_command(`SELECT receipt.RECEIPT_IMG,product.*,orders.*,shopping_cart.TOTAL,CONCAT(member.NAME,' ',member.LNAME) AS MEMBER_NAME ,CONCAT(member.ADDRESS,' จ.',member.PROVINCE,' อ.',member.PROVINCE,' ต.',member.PROVINCE,' รหัสไปรษณีย์ ',member.ZIPCODE,' ',member.PHONE_NUMBER) AS MEMBER_ADDRESS FROM orders
+  JOIN cart ON cart.CART_ID = orders.CART_ID
+  JOIN member ON cart.MEMBER_ID = member.MEMBER_ID
+  JOIN shopping_cart ON cart.CART_ID = shopping_cart.CART_ID
+  JOIN receipt ON cart.CART_ID = receipt.CART_ID
+  JOIN product ON shopping_cart.PRODUCT_ID = product.PRODUCT_ID
+  WHERE shopping_cart.STATUS = '3' AND orders.STATUS = '5'`);
+  //console.log(query);
+  res.send(query)
+});
+
+app.post('/selectproductorder2', async (req, res) => {
+  const {
+    body
+  } = req;
+
+  var query = await query_command(`SELECT product.*,orders.*,shopping_cart.TOTAL,orders.STATUS AS ORDERSTATUS FROM orders
+  JOIN cart ON cart.CART_ID = orders.CART_ID
+  JOIN shopping_cart ON cart.CART_ID = shopping_cart.CART_ID
+  JOIN product ON shopping_cart.PRODUCT_ID = product.PRODUCT_ID
+  WHERE shopping_cart.STATUS = '3' AND orders.STATUS = '4' AND MEMBER_ID = '${body.MEMBER_ID}'`);
+  //console.log(query);
+  res.send(query)
+});
+
+app.post('/selectproductmemberlike', async (req, res) => {
+  const {
+    body
+  } = req;
+
+  var query = await query_command(`SELECT * FROM likes 
+  JOIN product on likes.PRODUCT_ID = product.PRODUCT_ID 
+  WHERE likes.STATUS = '1' AND likes.MEMBER_ID = '${body.MEMBER_ID}'`);
   //console.log(query);
   res.send(query)
 });
