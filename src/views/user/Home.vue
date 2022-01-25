@@ -413,7 +413,7 @@ export default {
         PRODUCT_ID: element.PRODUCT_ID,
         MEMBER_ID: localStorage.getItem("IDMEMBER"),
       });
-      console.log(check.data.length);
+      console.log(check.data.length); 
       order1[index].checklike = check.data.length;
     }
     console.log(order1);
