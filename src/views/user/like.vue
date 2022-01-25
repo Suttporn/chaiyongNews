@@ -1,94 +1,110 @@
 <template>
   <div style="background: #f9fafb">
     <!-- --------------nav------------ -->
-    <!-- <Nav /> -->
+    <Nav />
     <!-- --------------nav------------ -->
-  
-  <div >
-    <b-nav style="background-color: rgb(52, 86, 139)">
-      <b-col lg="3" cols="4" style="padding: 0px">
-       <b-nav-item > <p class="text-light">ชัยยงค์การช่าง</p></b-nav-item>
-    </b-col>
-    <b-col lg="3" cols="6">
-   <b-nav-item >  <p class="text-light" >Active</p></b-nav-item>
-     </b-col> 
-   <b-col lg="3" cols="6">
-   <b-nav-item >  <p class="text-light" >Active</p></b-nav-item>
-     </b-col> 
-      
-   <b-col lg="3" cols="6">
-      <b-nav-item >  <p class="text-light" >Active</p></b-nav-item></b-col> 
-    <b-col lg="3" cols="6">
-      <b-nav-item disabled> <p class="text-muted" > Disabled</p></b-nav-item>
-      </b-col>
-   
-    
-  </b-nav>
-  </div>
-
-    <br /><br /><br />
     <br />
-    <div>
-      <b-row>
-        <b-col lg="6" cols="12">
-          <div style="margin-bottom: 20px">สินค้าที่ถูกใจ</div>
-        </b-col>
-        <b-col lg="6" cols="12">
-          <b-row>
-            <b-col>
-               
-   <button class="button-81" >ทั้งหมด</button>
-     
-            </b-col>
-            <b-col>
-               
-   <button class="button-61" >โปรโมชั่น</button>
-     
-            </b-col>
-            <b-col>
-               
-   <button class="button-81" >สินค้าขายดี</button>
-     
-            </b-col>
-          </b-row>
+    <div style="margin-top: 60px">
+      <h5>สินค้าที่ถูกใจ</h5>
+    </div>
+    <div align="center">
+      <b-row style="margin-right: 0px;margin-left: 0px;">
+        <b-col
+          v-for="item in product1"
+          :key="item.PRODUCT_ID"
+          cols="6"
+          lg="2"
+          style="padding: 5px"
+        >
+          <b-card-group
+            deck
+            img-top
+            tag="article"
+            style="max-width: 20rem"
+            class="mb-2"
+            border-variant="light"
+          >
+            <b-card style="padding: 0px" class="card55">
+              <b-card-img @click="godetail(item)" :src="item.IMG"> </b-card-img>
+              <b-card-text class="text1" style="padding: 20px">
+                <div align="left">
+                  <div style="line-height: 0.7">
+                    <b style="font-size: 12px">{{ item.PRODUCT_NAME }}</b>
+                  </div>
+                </div>
+                <div style="margin-top: 15px">
+                  <b-row>
+                    <b-col cols="6">
+                      <div align="left">
+                        <div style="line-height: 1.8">
+                          <h6 style="font-size: 18px">฿{{ item.PRICE }}</h6>
+                        </div>
+                      </div>
+                    </b-col>
+                    <b-col cols="6">
+                      <div v-if="item.checklike > 0" align="right">
+                        <b-icon
+                          icon="heart-fill"
+                          style="width: 30px; height: 30px"
+                          @click="Like(item)"
+                          variant="danger"
+                        ></b-icon>
+                      </div>
+                      <div v-else align="right">
+                        <b-icon
+                          icon="heart"
+                          style="width: 30px; height: 30px"
+                          @click="Like(item)"
+                          variant="danger"
+                        ></b-icon>
+                      </div>
+                    </b-col>
+                  </b-row>
+                </div>
+              </b-card-text>
+            </b-card>
+          </b-card-group>
         </b-col>
       </b-row>
-      <div style="margin-right: 20px; margin-left: 20px">
-        <b-row>
-          <b-col cols="6" lg="2" style="padding: 5px">
-            <b-card-group deck style="max-width: 20rem">
-              <b-card
-                img-src="https://firebasestorage.googleapis.com/v0/b/chaiyongimg.appspot.com/o/green.jpg?alt=media&token=42d97550-77b7-4026-bbe2-daec70134236"
-                img-top
-              >
-                <b-card-text>
-                  <div align="left">
-                    <div class="fonts" style="font-size: 15px">
-                      <p></p>
-                    </div>
-                    <b-row>
-                      <b-col cols="6"
-                        ><div align="left">
-                          <h6 style="font-size: 12px">฿</h6>
-                        </div>
-                      </b-col>
-                      <b-col cols="6">
-                        <div align="right">
-                         <label class="like">
-  <input type="checkbox"/>
-  <div class="hearth"/>
-</label>
+    </div>
+    <br><br>
+    <div class="footerr">
+      <b-row>
+        <b-col cols="4">
+          <div style="padding-top: 10px">
+            <b-icon
+              @click="backindex()"
+              icon="house-fill"
+              variant="light"
+              font-scale="1.5"
+            ></b-icon>
+          </div>
+          <font color="#FFFFFF">สินค้า</font>
+        </b-col>
 
-                        </div>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-card-text>
-              </b-card>
-            </b-card-group>
-          </b-col>
-        </b-row>
-      </div>
+        <b-col cols="4">
+          <div style="padding-top: 10px">
+            <b-icon
+              @click="backlike()"
+              icon="heart-fill"
+              variant="light"
+              font-scale="1.5"
+            ></b-icon>
+          </div>
+          <font color="#FFFFFF">ถูกใจ</font>
+        </b-col>
+
+        <b-col cols="4" @click="goshopping()">
+          <div style="padding-top: 10px">
+            <b-icon
+              icon="basket-fill"
+              variant="light"
+              font-scale="1.5"
+            ></b-icon>
+          </div>
+          <font color="#FFFFFF">รถเข็น</font>
+        </b-col>
+      </b-row>
     </div>
   </div>
 </template>
@@ -100,42 +116,91 @@ const api_url = require("../../../utilities/api");
 export default {
   components: {
     Nav,
-    
   },
-  body() {
-    const heartDOM = document.querySelector('.js-heart');
-// initialized like to false when user hasnt selected
-let liked = false;
-
-// create a onclick listener
-heartDOM.onclick = (event) => {
-	// check if liked 
-	liked = !liked; // toggle the like ( flipping the variable)
-	
-	// this is what we clicked on
-	const target = event.currentTarget;
-	
-	if (liked) {
-		// remove empty heart if liked and add the full heart
-		target.classList.remove('far');
-		target.classList.add('fas', 'pulse');
-	} else {
-		// remove full heart if unliked and add empty heart
-		target.classList.remove('fas');
-		target.classList.add('far');
-	}
-}
-
-heartDOM.addEventListener('animationend', (event) => {
-	event.currentTarget.classList.remove('pulse');
-})
-  }
-  
+  data: () => ({
+    product1: null,
+  }),
+  async created() {
+    // สินค้าถูกใจ
+    let p1 = await axios.post(`${api_url.api_url}/selectproductmemberlike`, {
+      MEMBER_ID: localStorage.getItem("IDMEMBER"),
+    });
+    this.product1 = p1.data;
+    // checklike
+    var order1 = [];
+    for (let index = 0; index < p1.data.length; index++) {
+      const element = p1.data[index];
+      console.log(element.PRODUCT_ID);
+      order1.push(element);
+      let check = await axios.post(`${api_url.api_url}/selectproductlike`, {
+        PRODUCT_ID: element.PRODUCT_ID,
+        MEMBER_ID: localStorage.getItem("IDMEMBER"),
+      });
+      console.log(check.data.length);
+      order1[index].checklike = check.data.length;
+    }
+    console.log(order1);
+    this.product1 = order1;
+  },
+  methods: {
+    backindex() {
+      this.$router.push({ path: "/" });
+    },
+    backlike() {
+      this.$router.push({ path: "/userlike" });
+    },
+    goshopping() {
+      this.$router.push({ path: "/usershopping" });
+    },
+    async reset() {
+      // สินค้าถูกใจ
+      let p1 = await axios.post(`${api_url.api_url}/selectproductmemberlike`, {
+        MEMBER_ID: localStorage.getItem("IDMEMBER"),
+      });
+      this.product1 = p1.data;
+      // checklike
+      var order1 = [];
+      for (let index = 0; index < p1.data.length; index++) {
+        const element = p1.data[index];
+        console.log(element.PRODUCT_ID);
+        order1.push(element);
+        let check = await axios.post(`${api_url.api_url}/selectproductlike`, {
+          PRODUCT_ID: element.PRODUCT_ID,
+          MEMBER_ID: localStorage.getItem("IDMEMBER"),
+        });
+        console.log(check.data.length);
+        order1[index].checklike = check.data.length;
+      }
+      console.log(order1);
+      this.product1 = order1;
+    },
+    Like(x) {
+      console.log(x);
+      if (x.checklike > 0) {
+        axios
+          .post(`${api_url.api_url}/updateLike`, {
+            PRODUCT_ID: x.PRODUCT_ID,
+          })
+          .then((response) => {
+            console.log(response.data);
+            this.reset(response);
+          });
+      } else {
+        axios
+          .post(`${api_url.api_url}/insertLike`, {
+            PRODUCT_ID: x.PRODUCT_ID,
+            MEMBER_ID: localStorage.getItem("IDMEMBER"),
+          })
+          .then((response) => {
+            console.log(response.data);
+            this.reset(response);
+          });
+      }
+    },
+  },
 };
 </script>
 <style>
-
-
 /* CSS */
 .button-61 {
   align-items: center;
@@ -147,10 +212,10 @@ heartDOM.addEventListener('animationend', (event) => {
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  
+
   padding: 8px 24px;
   font-size: 0.875rem;
-  
+
   height: 30px;
   justify-content: center;
   letter-spacing: 0.0892857em;
@@ -200,18 +265,16 @@ heartDOM.addEventListener('animationend', (event) => {
   background: #29b97b;
 }
 
-
-
 /* CSS */
 .button-81 {
   background-color: #ffffff;
   border: 0 solid #e2e8f0;
-   border-radius: 0.375rem;
+  border-radius: 0.375rem;
   box-sizing: border-box;
   color: #2dce89;
   cursor: pointer;
   display: inline-block;
-  width:80px;
+  width: 80px;
 
   font-size: 0.875rem;
 
@@ -219,8 +282,8 @@ heartDOM.addEventListener('animationend', (event) => {
   padding: 0.9rem 0.1rem;
   text-align: center;
   text-decoration: none #0d172a solid;
-  
-  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
   user-select: none;
   -webkit-user-select: none;
@@ -232,35 +295,30 @@ heartDOM.addEventListener('animationend', (event) => {
   color: #ffffff;
 }
 .container {
-	text-align: center;
-	font-size: 20pt;
-	font-family: 'arial';
-	margin-top: 200px;
+  text-align: center;
+  font-size: 20pt;
+  font-family: "arial";
+  margin-top: 200px;
 }
-
 
 .nav {
-    /* position: relative; */
-    position: fixed !important;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.2rem 0rem;
-    width: 100%;
-    
-    z-index: 9999;
- 
+  /* position: relative; */
+  /* position: fixed !important; */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem 0rem;
+  width: 100%;
+
+  z-index: 9999;
 }
 .nav-link {
-    display: block;
-    padding: 0.5rem 0.5rem !important;
+  display: block;
+  padding: 0.5rem 0.5rem !important;
 }
 p {
-    margin-top: 0rem !important;
-    margin-bottom: 0rem !important;
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
 }
-
-
-
 </style>

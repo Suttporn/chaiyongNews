@@ -115,13 +115,13 @@
             <h5 align="left" class="fontsx">การชำระเงิน</h5>
             <div>
               <b-form-group align="left">
-                <b-form-radio
+                <!-- <b-form-radio
                   v-model="STATUS_RECEIPT"
                   name="some-radios"
                   value="เงินสด"
                   class="fonts"
                   >เงินสด</b-form-radio
-                >
+                > -->
                 <b-form-radio
                   v-model="STATUS_RECEIPT"
                   name="some-radios"

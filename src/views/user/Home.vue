@@ -338,14 +338,24 @@
       <b-row>
         <b-col cols="4">
           <div style="padding-top: 10px">
-            <b-icon @click="backindex()" icon="house-fill" variant="light" font-scale="1.5"></b-icon>
+            <b-icon
+              @click="backindex()"
+              icon="house-fill"
+              variant="light"
+              font-scale="1.5"
+            ></b-icon>
           </div>
           <font color="#FFFFFF">สินค้า</font>
         </b-col>
 
         <b-col cols="4">
           <div style="padding-top: 10px">
-            <b-icon icon="heart-fill" variant="light" font-scale="1.5"></b-icon>
+            <b-icon
+              @click="backlike()"
+              icon="heart-fill"
+              variant="light"
+              font-scale="1.5"
+            ></b-icon>
           </div>
           <font color="#FFFFFF">ถูกใจ</font>
         </b-col>
@@ -443,6 +453,9 @@ export default {
   methods: {
     backindex() {
       this.$router.push({ path: "/" });
+    },
+    backlike() {
+      this.$router.push({ path: "/userlike" });
     },
     serchProduct() {
       // สินค้า

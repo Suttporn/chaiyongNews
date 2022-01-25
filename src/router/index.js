@@ -17,6 +17,8 @@ import adminsignup from '../views/admin/signup.vue';
 import admincustomer from '../views/admin/customer.vue';
 import adminproduct from '../views/admin/product.vue';
 import adminorder from '../views/admin/order.vue';
+import adminhistoryorder from '../views/admin/historyorder.vue';
+import adminhistoryordercancel from '../views/admin/historyordercancel.vue';
 
 Vue.use(VueRouter);
 
@@ -103,9 +105,14 @@ const routes = [
     component: adminorder
   },
    {
-    path: '/adminorder',
+    path: '/adminhistoryorder',
     name: 'admin',
-    component: adminorder
+    component: adminhistoryorder
+  },
+  {
+    path: '/adminhistoryordercancel',
+    name: 'admin',
+    component: adminhistoryordercancel
   },
 ];
 

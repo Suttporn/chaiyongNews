@@ -8,7 +8,7 @@
       <b-row>
         <b-col cols="12" lg="6" style="margin-top: 10px">
           <div>
-            <b-card style="border-radius: 20px"  border-variant="light">
+            <b-card style="border-radius: 20px" border-variant="light">
               <b-row>
                 <b-col cols="4" lg="5">
                   <img
@@ -31,7 +31,7 @@
         </b-col>
         <b-col cols="12" lg="6" style="margin-top: 10px">
           <div>
-            <b-card style="border-radius:20px">
+            <b-card style="border-radius: 20px">
               <b-row>
                 <b-col cols="4" lg="5">
                   <img
@@ -51,9 +51,9 @@
             </b-card>
           </div>
         </b-col>
-         <b-col cols="12" lg="6" style="margin-top: 10px">
+        <b-col cols="12" lg="6" style="margin-top: 10px">
           <div>
-            <b-card style="border-radius:20px">
+            <b-card style="border-radius: 20px">
               <b-row>
                 <b-col cols="4" lg="5">
                   <img
@@ -76,7 +76,7 @@
         </b-col>
         <b-col cols="12" lg="6" style="margin-top: 10px">
           <div>
-            <b-card style="border-radius:20px">
+            <b-card style="border-radius: 20px">
               <b-row>
                 <b-col cols="4" lg="5">
                   <img
@@ -102,42 +102,42 @@
     <!-- footer -->
     <br /><br />
     <div class="footerr">
-     
-        <b-row>
-          <b-col cols="4">
-            <div style="padding-top: 10px">
-              <b-icon
-                icon="house-fill"
-                variant="light"
-                font-scale="1.5"
-              ></b-icon>
-            </div>
-            <font color="#FFFFFF">สินค้า</font>
-          </b-col>
+      <b-row>
+        <b-col cols="4">
+          <div style="padding-top: 10px">
+            <b-icon
+              @click="backindex()"
+              icon="house-fill"
+              variant="light"
+              font-scale="1.5"
+            ></b-icon>
+          </div>
+          <font color="#FFFFFF">สินค้า</font>
+        </b-col>
 
-          <b-col cols="4">
-            <div style="padding-top: 10px">
-              <b-icon
-                icon="heart-fill"
-                variant="light"
-                font-scale="1.5"
-              ></b-icon>
-            </div>
-            <font color="#FFFFFF">ถูกใจ</font>
-          </b-col>
+        <b-col cols="4">
+          <div style="padding-top: 10px">
+            <b-icon
+              @click="backlike()"
+              icon="heart-fill"
+              variant="light"
+              font-scale="1.5"
+            ></b-icon>
+          </div>
+          <font color="#FFFFFF">ถูกใจ</font>
+        </b-col>
 
-          <b-col cols="4" @click="gocart()">
-            <div style="padding-top: 10px">
-              <b-icon
-                icon="basket-fill"
-                variant="light"
-                font-scale="1.5"
-              ></b-icon>
-            </div>
-            <font color="#FFFFFF">รถเข็น</font>
-          </b-col>
-        </b-row>
-     
+        <b-col cols="4" @click="goshopping()">
+          <div style="padding-top: 10px">
+            <b-icon
+              icon="basket-fill"
+              variant="light"
+              font-scale="1.5"
+            ></b-icon>
+          </div>
+          <font color="#FFFFFF">รถเข็น</font>
+        </b-col>
+      </b-row>
     </div>
     <!-- footer -->
   </div>
@@ -150,6 +150,17 @@ export default {
   },
   data() {
     return;
+  },
+  methods: {
+    backindex() {
+      this.$router.push({ path: "/" });
+    },
+    backlike() {
+      this.$router.push({ path: "/userlike" });
+    },
+    goshopping() {
+      this.$router.push({ path: "/usershopping" });
+    },
   },
 };
 </script>
