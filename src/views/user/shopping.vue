@@ -183,18 +183,9 @@
           >
         </div>
         <div v-if="IMG_RECEIPT != ''">
-          <div v-if="loadadd" align="center">
-            <b-spinner
-              variant="success"
-              style="width: 3rem; height: 3rem"
-              label="Spinning"
-            ></b-spinner>
-          </div>
-          <div v-else>
             <b-button class="mt-3" variant="success" block @click="addorder"
               >ยืนยัน</b-button
             >
-          </div>
         </div>
       </b-modal>
     </div>
