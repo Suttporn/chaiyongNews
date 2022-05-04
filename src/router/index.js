@@ -19,6 +19,7 @@ import adminproduct from '../views/admin/product.vue';
 import adminorder from '../views/admin/order.vue';
 import adminhistoryorder from '../views/admin/historyorder.vue';
 import adminhistoryordercancel from '../views/admin/historyordercancel.vue';
+import admindashboardfrom from '../views/admin/dashboard.vue';
 
 Vue.use(VueRouter);
 
@@ -113,6 +114,11 @@ const routes = [
     path: '/adminhistoryordercancel',
     name: 'admin',
     component: adminhistoryordercancel
+  },
+  {
+    path: '/admindashboardfrom',
+    name: 'admin',
+    component: admindashboardfrom
   },
 ];
 

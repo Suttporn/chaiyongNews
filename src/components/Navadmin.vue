@@ -18,7 +18,7 @@
             <b-dropdown-item  @click="historyorder()">ประวัติการสั่งซื้อ</b-dropdown-item>
             <b-dropdown-item @click="historyordercancel()">ประวัติการยกเลิกออเดอร์</b-dropdown-item>
           </b-nav-item-dropdown>
-          <b-nav-item href="#">dashboard</b-nav-item>
+          <b-nav-item @click="admindashboardfrom()">dashboard</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -65,6 +65,9 @@ export default {
     },
     historyordercancel(){
         this.$router.push({ path: "/adminhistoryordercancel" });
+    },
+     admindashboardfrom(){
+        this.$router.push({ path: "/admindashboardfrom" });
     },
     logouts() {
       console.log("logout");

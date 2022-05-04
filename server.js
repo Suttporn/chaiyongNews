@@ -88,6 +88,60 @@ app.post('/insertLike', async (req, res) => {
   res.send(query)
 });
 
+
+app.post('/Dashboard1', async (req, res) => {
+  const {
+    body
+  } = req;
+
+  var query = await query_command(
+    `SELECT SUM(TOTAL) AS TOTAL FROM orders
+    JOIN shopping_cart ON orders.CART_ID = shopping_cart.CART_ID
+    WHERE orders.STATUS = '4'  AND YEAR(orders.DATE) LIKE '%${body.YEAR}%' AND MONTH(orders.DATE) LIKE '%${body.MONTH}%'`);
+  //console.log(query);
+  res.send(query)
+});
+
+app.post('/Dashboard2', async (req, res) => {
+  const {
+    body
+  } = req;
+
+  var query = await query_command(
+    `SELECT SUM(TOTAL_PRICE) AS TOTAL_PRICE FROM orders
+    WHERE orders.STATUS = '4'  AND YEAR(orders.DATE) LIKE '%${body.YEAR}%' AND MONTH(orders.DATE) LIKE '%${body.MONTH}%'`);
+  //console.log(query);
+  res.send(query)
+});
+
+app.post('/Dashboard3', async (req, res) => {
+  const {
+    body
+  } = req;
+
+  var query = await query_command(
+    `SELECT SUM(TOTAL) AS TOTALCANCEL FROM orders
+    JOIN shopping_cart ON orders.CART_ID = shopping_cart.CART_ID
+    WHERE orders.STATUS = '5'  AND YEAR(orders.DATE) LIKE '%${body.YEAR}%' AND MONTH(orders.DATE) LIKE '%${body.MONTH}%'`);
+  //console.log(query);
+  res.send(query)
+});
+
+app.post('/Dashboard4', async (req, res) => {
+  const {
+    body
+  } = req;
+
+  var query = await query_command(
+    `SELECT product.PRODUCT_ID,product.PRODUCT_NAME,shopping_cart.TOTAL,SUM(shopping_cart.TOTAL) AS TOTAL FROM orders
+    JOIN shopping_cart ON orders.CART_ID = shopping_cart.CART_ID
+    JOIN product ON product.PRODUCT_ID = shopping_cart.PRODUCT_ID
+    WHERE orders.STATUS = '4' AND YEAR(orders.DATE) LIKE '%${body.YEAR}%' AND MONTH(orders.DATE) LIKE '%${body.MONTH}%'
+    GROUP BY product.PRODUCT_ID
+    ORDER BY SUM(shopping_cart.TOTAL) DESC `);
+  //console.log(query);
+  res.send(query)
+});
 app.post('/Shoppingcart', async (req, res) => {
   const {
     body
